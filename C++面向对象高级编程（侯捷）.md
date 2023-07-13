@@ -90,3 +90,165 @@ string s1("Hello ");
 string s2("World ");
 string* ps = new string;
 ```
+
+### Object Based (基于对象) vs. Object Oriented(面向对象)
+
+Object Based ： 面向的是单一class的设计
+Object Oriented ：面对的是多重classes的设计，classes和classes之间的关系
+
+### 我们的第一个C++程序
+
+Classes 的两个经典分类：
+
+- Class without pointer member(s)
+**complex**
+- Class with pointer member(s)
+**string**
+
+### C++ program 代码基本形式
+.h(header files)头文件 .cpp .h(header files)标准库
+```cpp
+#include <iostream.h>
+#include "complex.h"
+```
+头文件 + 主程序
+延伸文件名（extension file name）不一定是.h或.cpp，也可能是.hpp或其他或甚至无延伸名。
+
+### Output ， C++ vs. C
+- C
+#include <cstdio>
+```c
+#include <stdio.h>
+
+int main()
+{
+    int i =7;
+    printf("i=%d \n", i);
+    
+    return 0;
+}
+```
+- C++
+#include <iostream>
+```cpp
+#include <iostream.h>
+using namespace std;
+
+int main()
+{
+    int i = 7;
+    cout << "i=" << i << endl;
+    
+    return 0;
+}
+```
+### Header（头文件）中的防御式声明
+`complex.h`
+```cpp
+#ifndef __COMPLEX__
+#define __COMPLEX__
+...
+#endif
+```
+`complex-test.h`
+```cpp
+#include <iostream>
+#include "comples.h"
+using namespace std;
+
+int main()
+{
+    complex c1(2,1);
+    complex c2;
+    cout << c1 << endl;
+    cout << c2 << endl;
+    
+    c2 = c1 + 5;
+    c2 = 7 + c1;
+    c2 = c1 + c2;
+    c2 += c1;
+    c2 += 3;
+    c2 = -c1;
+    
+    cout << (c1 == c2) << endl;
+    cout << (c1 != c2) << endl;
+    cout << conj(c1) << endl;
+    return 0;
+}
+```
+### Header（头文件）的布局
+```cpp
+#ifndef __COMPLEX__
+#define __COMPLEX__
+//0. forward declarations （前置声明）
+#include <cmath>
+
+class ostream;
+class complex;
+
+complex$
+    __doapl (complex* ths, const complex& r);
+//1. class declarations（类-声明）
+class complex
+{
+    ...
+};
+//2. class declarations（类-定义）
+complex::function ...
+#endif
+```
+### class declarations（类-声明）
+```cpp
+class complex // class head
+
+{            // class body
+public：
+    complex (double r = 0, double i = 0)
+        : re (r), im (i)
+    { }
+    complex& operator += (const complex&);
+    double real () const { return re; }
+    double imag () const { return im; }
+
+private:
+    double re, im;
+    
+    friend complex& __doapl (complex*, const complex&);
+};
+```
+有些函数在body直接定义，另一些在body之外定义
+```cpp
+{
+    complex c1(2,1);
+    complex c2;
+    ..
+}
+```
+### class template（模板）简介
+```cpp
+template<tyoename T>
+class complex // class head
+
+{            // class body
+public：
+    complex (double r = 0, double i = 0)
+        : re (r), im (i)
+    { }
+    complex& operator += (const complex&);
+    double real () const { return re; }
+    double imag () const { return im; }
+
+private:
+    T re, im;
+    
+    friend complex& __doapl (complex*, const complex&);
+};
+```
+
+```cpp
+{
+    complex<double> c1(2.5,1.5);
+    complex<int> c2(2,6);
+    ..
+}
+```
