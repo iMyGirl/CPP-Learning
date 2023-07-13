@@ -4,7 +4,9 @@
 
 [视频链接](https://www.youtube.com/playlist?list=PL-X74YXt4LVZ137kKM5dNfCIC4tsScerb)
 
-[PPT](https://github.com/ZachL1/Bilibili-plus)
+[资料汇总](https://github.com/ZachL1/Bilibili-plus)
+
+[PPT](https://github.com/ZachL1/Bilibili-plus/blob/master/C%2B%2B-OOPBase1-HouJie/slide/C%2B%2B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B(%E4%B8%8A)_%E8%AF%BE%E4%BB%B6.pdf)
 
 ## P1 C++编程简介
 
@@ -65,4 +67,26 @@ C++ 语言 & 标准库
 
 图略
 
-C++ 将数据和函数封装在一起创建对象
+>C++ 将数据和函数封装在一起创建对象
+
+图略
+
+complex
+
+实部与虚部 & 加减乘除 共轭 正弦 ...
+
+```c
+complex c1(2,1);
+complex c2;
+complex* pc = new complex(0,1);
+```
+
+string
+
+字符（s）（其实是个ptr，指向一串字符） & 拷贝 输出 附加 插入 ...
+
+```c
+string s1("Hello ");
+string s2("World ");
+string* ps = new string;
+```
