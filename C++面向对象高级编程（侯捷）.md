@@ -4,6 +4,8 @@
 
 [视频链接](https://www.youtube.com/playlist?list=PL-X74YXt4LVZ137kKM5dNfCIC4tsScerb)
 
+[PPT](https://github.com/ZachL1/Bilibili-plus)
+
 ## P1 C++编程简介
 
 ### 我们的目标
@@ -57,3 +59,10 @@ C++ 语言 & 标准库
 - THE C++ STANDARD LIBRARY
 - STL源码剖析
 
+## P2 头文件与类的声明
+
+### C vs C++ 关于数据和函数
+
+图略
+
+C++ 将数据和函数封装在一起创建对象
