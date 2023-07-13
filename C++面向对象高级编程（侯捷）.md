@@ -1,6 +1,9 @@
+[TOC]
+
+
 # C++面向对象高级编程（侯捷）
 
-[TOC]
+
 
 [视频链接](https://www.youtube.com/playlist?list=PL-X74YXt4LVZ137kKM5dNfCIC4tsScerb)
 
