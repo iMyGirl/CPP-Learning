@@ -272,3 +272,135 @@ private:
     ..
 }
 ```
+
+## P3 3 构造函数
+
+### inline（内联）函数
+
+```cpp
+class complex 
+
+{            
+public：
+    complex (double r = 0, double i = 0)
+        : re (r), im (i)
+    { } // inline
+    complex& operator += (const complex&);
+    double real () const { return re; }  // inline
+    double imag () const { return im; }  // inline
+    // 函数若在class内定义完成，成为inline候选人
+    // 但最终是否是 inline function，由编译器决定
+
+private:
+    double re, im;
+    
+    friend complex& __doapl (complex*, const complex&);
+};
+```
+
+```cpp
+//2-2
+inline double
+imag(const complex& x)
+{
+    return x.imag();
+}
+// 不在本体中定义的 inline
+```
+
+### access level(访问级别)
+
+```cpp
+class complex 
+
+{            
+public：
+    complex (double r = 0, double i = 0)
+        : re (r), im (i)
+    { } // inline
+    complex& operator += (const complex&);
+    double real () const { return re; } 
+    double imag () const { return im; }  
+    
+
+private: // 一般存放 data，还有第三种 potective
+    double re, im;
+    
+    friend complex& __doapl (complex*, const complex&);
+};
+```
+使用
+- 错误使用
+```cpp
+{
+    complex c1(2,1);
+    cout << c1.re;
+    cout << c1.im;
+}
+```
+- 正确使用
+```cpp
+{
+    complex c1(2,1);  // 创建对象
+    cout << c1.real();
+    cout << c1.imag();
+}
+```
+
+### constructor（ctor, 构造函数）
+
+```cpp
+class complex 
+
+{            
+public：
+    complex (double r = 0, double i = 0) // 构造函数名相同，default argument（默认实参），没有返回值
+        : re (r), im (i) // initialization list （初值列， 初始列）
+    { re = r; im = i; } // assignments（赋值）
+    complex& operator += (const complex&);
+    double real () const { return re; } 
+    double imag () const { return im; }  
+    
+
+private: 
+    double re, im;
+    
+    friend complex& __doapl (complex*, const complex&);
+};
+```
+```cpp
+{
+    complex c1(2,1);  
+    complex c2;
+    comlex* p = new complex(4);
+}
+```
+
+### ctor（构造函数）可以有很多个 - overlording（重载）
+
+```cpp
+class complex 
+
+{            
+public：
+
+    complex (double r = 0, double i = 0) // 1
+        : re (r), im (i)
+    { } 
+    
+    complex () : re(0), im(0) {} // 2 跟1冲突，不可以这样写
+    
+    complex& operator += (const complex&);
+    double real () const { return re; } // 1
+    double imag () const { return im; }  
+    
+
+private: 
+    double re, im;
+    
+    friend complex& __doapl (complex*, const complex&);
+};
+```
+```cpp
+void real(double r) { re = r; } // 2
+```
