@@ -140,6 +140,44 @@ P.S. >将 `endl` 替换为 `'\n'` 会产生不同的效果。`endl` 是 C++ 标�
 #### typedef 声明
 
 ```cpp
-typedef int feet;
-feet distance;
+//typedef int feet;
+//feet distance;
+#include<iostream>
+#include <typeinfo>
+
+using namespace std;
+
+int main()
+{
+    typedef int feet;
+    feet distance;
+    distance = 10010;
+    cout << "distance:"  << distance << endl;
+    //cout << "type of distance" << typeid(distance) << typeid(distance).name() << endl;
+    cout << "type of distance: " << typeid(distance).name() << endl;
+    return 0;
+}
 ```
+
+![Snipaste_2024-02-21_23-25-15.png](C:\Users\chris.tian\Documents\work\CPP-leaning\pic\Snipaste_2024-02-21_23-25-15.png)
+
+eg. 2nd
+
+```cpp
+#include <iostream>
+#include <typeinfo>
+
+int main() {
+    int x = 5;
+    double y = 3.14;
+    std::string str = "Hello";
+
+    std::cout << "x is of type: " << typeid(x).name() << std::endl;
+    std::cout << "y is of type: " << typeid(y).name() << std::endl;
+    std::cout << "str is of type: " << typeid(str).name() << std::endl;
+
+    return 0;
+}
+```
+
+![Snipaste_2024-02-21_23-25-43.png](C:\Users\chris.tian\Documents\work\CPP-leaning\pic\Snipaste_2024-02-21_23-25-43.png)
