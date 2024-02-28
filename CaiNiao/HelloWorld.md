@@ -181,3 +181,12 @@ int main() {
 ```
 
 ![Snipaste_2024-02-21_23-25-43.png](C:\Users\chris.tian\Documents\work\CPP-leaning\pic\Snipaste_2024-02-21_23-25-43.png)
+
+#### 枚举类型
+
+> 如果一个变量只有几种可能的值，可以定义为枚举(enumeration)类型。所谓"枚举"是指将变量的值一一列举出来，变量的值只能在列举出来的值的范围内。
+
+```cpp
+enum color { red, green, blue } c ;
+c = blue;
+```
