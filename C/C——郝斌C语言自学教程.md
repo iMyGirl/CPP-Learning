@@ -21,7 +21,7 @@
 
 大环境、勤奋、出身、机遇、天赋
 
-# C 概述 —— 本讲内容概述
+# 一、C 概述 —— 本讲内容概述
 
 ## 1. 为什么要学习 C 语言
 
@@ -165,8 +165,127 @@ int main(void)
 
 ![image-20250120190922135](pic/image-20250120190922135.png)
 
-
 ## 6. 举例子：一元二次方程
 
 
-# C 概述
+`computer.c`
+```c
+# include <stdio.h>
+# include <math.h>
+
+int main(void)
+{
+    // 把三个系数保存到计算机中
+    int a = 1;  // =不表示相等，表示赋值
+    int b = 5;
+    int c = 6;
+    double delta; // delta 存放的是 b*b-4*a*c 的值
+    double x1; // 存放一元二次方程的其中一个解   
+    double x2; // 存放一元二次方程的其中一个解   
+    delta = b*b - 4*a*c;
+
+    if (delta > 0)
+    {
+        x1 = (-b + sqrt(delta)) / (2*a);
+        x2 = (-b - sqrt(delta)) / (2*a);
+        printf("该一元二次方程有两个解， x1 = %f, x2 = %f\n", x1, x2);
+    }
+    else if (delta == 0)
+    {
+        x1 = (-b + sqrt(delta)) / (2*a);
+        x2 = x1;
+        printf("该一元二次方程有一个解， x1 = x2 = %f\n", x1);
+    }
+    else
+    {
+        printf("无解\n");
+    }
+
+    return 0;
+}
+```
+编译时 加上 `-lm` 选项：
+
+```bash
+gcc computer.c -o computer.out -lm
+# 或者用 g++ 编译
+g++ computer.c -o computer.out
+```
+
+- Root Cause：  `-lm` 显式链接数学库（libm）。C 语言标准库中的数学函数（如 sqrt）并不在标准 C 库（libc）中，而是被独立存放在 libm 数学库中。因此：如果你不加 `-lm`，链接器 不会自动找到 sqrt，导致 undefined reference。
+- Solution： `-lm` 让编译器在链接阶段加载数学库 libm，从而找到 sqrt。
+
+执行
+```bash
+./computer.out 
+# 或者执行下方的命令，编译和执行一行命令都搞定了
+gcc computer.c -lm -o /dev/stdout | ./computer.out
+```
+
+![image-20250224181959294](pic/image-20250224181959294.png)
+
+
+
+## 7. V++6.0 软件使用详解
+
+略（本次实践实际使用 Linux 环境中 vim + gcc compile 的方式进行）
+
+
+
+## 8. C 概述_回顾本讲内容
+
+
+
+
+
+
+
+
+
+# 二、C 编程预备计算机专业知识
+
+大纲如二级目录
+
+
+
+## 1. CPU\内存条\硬盘\显卡\主板\显示器 之间的关系
+
+
+
+
+
+## 2. HelloWorld 程序如何运行起来的
+
+
+
+## 3. 什么是数据类型
+
+
+
+## 4. 什么是变量
+
+
+
+
+
+## 5. CPU 内存条 VC++6.0 操作系统 之间的关系
+
+
+
+## 6. 变量为什么必须初始化
+
+
+
+## 7. 如何定义变量
+
+
+
+## 8. 什么是进制
+
+
+
+## 9. 常量在C语言中是如何表示的
+
+
+
+## 10. 常量是以什么样的二进制代码存储进计算机中的
