@@ -181,9 +181,10 @@ int main(void)
     int a = 1;  // =不表示相等，表示赋值
     int b = 5;
     int c = 6;
-    double delta; // delta 存放的是 b*b-4*a*c 的值
-    double x1; // 存放一元二次方程的其中一个解   
-    double x2; // 存放一元二次方程的其中一个解   
+    double delta;  // delta 存放的是 b*b-4*a*c 的值
+    double x1;  // 存放一元二次方程的其中一个解   
+    double x2;  // 存放一元二次方程的其中一个解   
+    
     delta = b*b - 4*a*c;
 
     if (delta > 0)
@@ -498,26 +499,283 @@ j = 5;
 
 ![image-20250305154859967](pic/image-20250305154859967.png)
 
+其余详见 [<span style="color:red">进制转换</span> ppt ](https://github.com/iMyGirl/CPP-Learning/tree/main/C/原始资料/【14-25】 源代码/进制转换 ppt)
 
+```c
+# include <stdio.h>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+int main(void){
+        int i = 88;
+        printf("i = %o\n", i);
+        /*
+                printf 的用法
+                %d 表示以十进制输出
+                %x 或 %X 表示以十六进制输出
+                %o 表示以八进制输出
+         */
+        return 0;
+}
+```
 
 
 
 ## 9. 常量在C语言中是如何表示的
 
+- 整数
+  - 十进制：传统的写法；
+  - 十六进制：前面加0x或0X
+  - 八进制：前面加0（注意是数字零不是字母o）
+
+```c
+# include <stdio.h>
+
+int main(void){
+        int i = 015; // 八进制前面加零
+        printf("%d\n", i);
+        return 0;
+}
+```
+
+
+- 浮点数
+
+  - 传统的写法
+
+    float x = 3.2; // 传统
+
+  - 科学计数法
+
+    float x = 3.2e3; // 实际值是 3200
+
+    float x = 123.34e-2; // 实际值是 1.2334
+
+```c
+# include <stdio.h>
+
+int main(void){
+        float x = 123.34e-2; // 123.34e-2 默认是 double 类型 ，然后赋值给 float x 会丢失精度
+        // float x = 123.34e-2F // 这样写默认的就是 float 类型了
+        printf("%f\n", x);
+        return 0;
+}
+```
+
+- 字符
+  - 单个字符用单引号括起来
+    'A' 表示字符A
+    'AB' 错误
+    "AB" 正确
+    
+  - 字符串用双引号括起来
+  
+    "A" 亦正确，因为"A"代表了 'A' '\0' 的组合
 
 
 ## 10. 常量是以什么样的二进制代码存储进计算机中的
+
+- 整数是以补码的形式转化为二进制代码存储在计算机中的
+- 实数是以 IEEE754 标准转化为二进制代码存储在计算机中的
+- 字符的本质与整数的存储方式相同
+
+编码
+
+int i = 86；// 15
+'A' --> ASCALL 码（65） --> 补码
+
+## 回顾
+
+略
+
+
+
+## 11. 代码规范化
+
+推荐书籍：林锐《高质量C/C++编程》
+
+
+
+```c
+# include <stdio.h>
+
+int main(void){
+
+        return 0;
+}
+```
+
+
+
+```c
+# include <stdio.h>
+
+int main(void){
+    if (*******(*******))   {
+
+        while (*****){
+                for (******) {
+                        ****
+                }
+        }
+        i = 5;
+        j = 20;
+        
+    }
+	
+    if (asdf(asdf(asdf))){
+        while (asdf(asdf)){
+            asdf
+        }
+    }
+    
+        return 0;
+}
+```
+
+
+
+```c
+# include <stdio.h>
+
+int main(void){
+	// 定义变量
+    
+    // 对变量进行操作
+    
+    // 输出值
+    return 0;
+}
+```
+
+
+
+
+
+## 12. 什么是字节
+
+
+
+字节就是存储数据的单位，并且是硬件所能访问的最小单位
+
+1 B（字节） = 8 bit（位）
+
+1 KB = 1024 B
+
+1 M = 1024 KB
+
+1 G = 1024 M
+
+## 13. 不同类型数据之间相互赋值的问题
+
+> 暂不考虑
+
+是否会丢失数据
+
+```c
+int i = 45;
+long j = 102345;
+i = j;
+printf("%d %ld\n", i, j);
+
+float x = 6.6;
+float y = 8.8;
+printf("%f %lf\n", x, y)
+```
+
+```c
+# include <stdio.h>
+
+int main(void){
+        int i = 2147483648;
+        printf("i = %d\n", i);
+        return 0;
+}
+```
+
+
+
+- 补码
+
+
+
+## 14. 什么是 ASCII 码
+
+
+
+<span style="color:red">什么是 ASCII 码</span>
+
+```c
+# include <stdio.h>
+
+int main(void){
+        char ch = 'A';  // 第4行，OK，等价于 char ch; ch = 'A';
+        //char ch = "AB";  // error ，因为 "AB" 是字符串，我们不能把字符串赋给单个字符，但是实测 gcc 可以编译，VC 不行
+        //char ch = "A";  // error ，实际上是字符串'A' '\0' 的组合，但是实测 gcc 可以编译，VC 不行。C 的编译器（gcc）和C++的编译器（g++）会有差别, g++ 不行， gcc 可以
+        //char ch = 'AB';  // error ，单引号只能括单个字符，但是实测 gcc & g++ 可以编译，VC 不行。'AB' 是错误
+        //char ch = 'B';  // error , 因为 ch 变量已经在4行定义了，这样会导致变量名会重复
+        ch = 'C';  // OK
+        ch = 'D';
+        printf("%c\n", ch);
+        return 0;
+}
+```
+
+P.S. C 的编译器（gcc）和C++的编译器（g++）会有差别
+
+![image-20250312190041192](pic/image-20250312190041192.png)
+
+
+
+ACSII 码不是一个值，而是一种规定，
+
+ACSII 码规定了不同的字符是使用哪个整数值去表示
+
+它规定了
+
+'A' -- 65
+
+'B' -- 66
+
+'a' -- 97
+
+'b' -- 98
+
+'0' -- 48 （字符数字0）
+
+```c
+# include <stdio.h>
+
+int main(void){
+        char ch = 'A';
+        printf("%c\n", ch);
+        printf("%d\n", ch);
+        return 0;
+}
+```
+
+其他编码标准
+
+- GB2312
+
+- UTF-8
+
+
+
+## 15. 字符的存储[字符本质上与整数的存储方式相同]
+
+由上一节得出如题结论
+
+# 三、基础用法
+
+
+
+## 1. 基本的输入和输出函数的用法
+
+- printf()
+- scanf()
+
+## 2. 对初学编程者的一些个人建议
+
+略
+
+
+
